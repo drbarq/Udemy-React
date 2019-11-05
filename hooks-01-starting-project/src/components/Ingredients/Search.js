@@ -28,7 +28,6 @@ const Search = React.memo(props => {
     // more memory efficient to remove timers
   }, [enteredFilter, inputRef, sendRequest])
 
-
   useEffect(() => {
     if (!isLoading && !error && data) {
       const loadedIngredients = []
@@ -42,7 +41,6 @@ const Search = React.memo(props => {
       onLoadIngredients(loadedIngredients)
     }
   }, [data, isLoading, error, onLoadIngredients])
-
 
   return (
     <section className="search">
