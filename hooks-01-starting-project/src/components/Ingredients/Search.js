@@ -9,7 +9,7 @@ const Search = React.memo(props => {
 
   useEffect(() => {
     const query = enteredFilter.length === 0 
-      ? '' 
+      ? ''
       : `?orderBy="title"&equalTo="${enteredFilter}"`
     fetch('https://udemy-react-burgerhook.firebaseio.com/ingredients.json' + query)
       .then(response => response.json())

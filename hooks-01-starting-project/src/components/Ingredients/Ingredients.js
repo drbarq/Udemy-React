@@ -23,6 +23,10 @@ function Ingredients() {
       })
   }, [])
 
+  useEffect(() => {
+    console.log('Rendering Ingredients', userIngredients)
+  }, [userIngredients])
+
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
     setUserIngredients(filteredIngredients)
   }, [])
