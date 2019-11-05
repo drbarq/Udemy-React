@@ -21,37 +21,41 @@ const ingredientReducer = (currentIngredients, action) => {
 
 function Ingredients() {
   const [ userIngredients, dispatch ] = useReducer(ingredientReducer, [])
-  const { isLoading, error, data, sendRequest } = useHttp()
+  const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier } = useHttp()
 
   useEffect(() => {
-    console.log('Rendering Ingredients', userIngredients)
-  }, [userIngredients])
+    // console.log('Rendering Ingredients', userIngredients)
+    if (!isLoading && !error && reqIdentifier === 'REMOVE_INGREDIENT') {
+      dispatch({type: 'DELETE', id: reqExtra})
+    } else if (!isLoading && !error && reqIdentifier === 'ADD_INGREDIENT') {
+      dispatch({type: 'ADD', ingredient: {id: data.name, ...reqExtra}})
+    }
+  }, [data, reqExtra, reqIdentifier, isLoading])
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
     dispatch({type: 'SET', ingredients: filteredIngredients })
   }, [])
 
   const addIngredientHandler = useCallback(ingredient => {
-    // dispatchHttp({type: 'SEND'})
-    // fetch('https://udemy-react-burgerhook.firebaseio.com/ingredients.json', {
-    //   method: 'POST',
-    //   body: JSON.stringify(ingredient),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    // .then(response => {
-    //   dispatchHttp({type:'RESPONSE'})
-    //   return response.json()
-    // })
-    // .then(responseData => {
-    //   dispatch({type: 'ADD', ingredient: {id: responseData.name, ...ingredient }})
-    // })      
-  }, [])
+
+    sendRequest(
+      'https://udemy-react-burgerhook.firebaseio.com/ingredients.json',
+      'POST',
+      JSON.stringify(ingredient),
+      ingredient,
+      'ADD_INGREDIENT'
+    )
+  }, [sendRequest])
 
   const removeIngredientHandler = useCallback(ingredientId => {
     // dispatchHttp({type: 'SEND'})
-    sendRequest(`https://udemy-react-burgerhook.firebaseio.com/ingredients/${ingredientId}.json`, 'DELETE')
+    sendRequest(
+      `https://udemy-react-burgerhook.firebaseio.com/ingredients/${ingredientId}.json`, 
+      'DELETE',
+      null,
+      ingredientId,
+      'REMOVE_INGREDIENT'
+    )
   }, [sendRequest])
 
   const clearError = useCallback(() => {
@@ -125,3 +129,19 @@ export default Ingredients;
   // const [ error, setError ] = useState()
 
       // setIsLoading(true)
+
+    // dispatchHttp({type: 'SEND'})
+    // fetch('https://udemy-react-burgerhook.firebaseio.com/ingredients.json', {
+    //   method: 'POST',
+    //   body: JSON.stringify(ingredient),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    // .then(response => {
+    //   dispatchHttp({type:'RESPONSE'})
+    //   return response.json()
+    // })
+    // .then(responseData => {
+    //   dispatch({type: 'ADD', ingredient: {id: responseData.name, ...ingredient }})
+    // })  
