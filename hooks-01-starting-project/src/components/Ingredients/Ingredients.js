@@ -21,7 +21,7 @@ const ingredientReducer = (currentIngredients, action) => {
 
 function Ingredients() {
   const [ userIngredients, dispatch ] = useReducer(ingredientReducer, [])
-  const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier } = useHttp()
+  const { isLoading, error, data, sendRequest, reqExtra, reqIdentifier, clear } = useHttp()
 
   useEffect(() => {
     // console.log('Rendering Ingredients', userIngredients)
@@ -37,7 +37,6 @@ function Ingredients() {
   }, [])
 
   const addIngredientHandler = useCallback(ingredient => {
-
     sendRequest(
       'https://udemy-react-burgerhook.firebaseio.com/ingredients.json',
       'POST',
@@ -48,7 +47,6 @@ function Ingredients() {
   }, [sendRequest])
 
   const removeIngredientHandler = useCallback(ingredientId => {
-    // dispatchHttp({type: 'SEND'})
     sendRequest(
       `https://udemy-react-burgerhook.firebaseio.com/ingredients/${ingredientId}.json`, 
       'DELETE',
@@ -57,11 +55,6 @@ function Ingredients() {
       'REMOVE_INGREDIENT'
     )
   }, [sendRequest])
-
-  const clearError = useCallback(() => {
-    // dispatchHttp({type: 'CLEAR'})
-    
-  }, [])
 
   const ingredientList = useMemo(() => {
     return (
@@ -74,7 +67,7 @@ function Ingredients() {
 
   return (
     <div className="App">
-      {error && <ErrorModal onClose={clearError}>{error}</ErrorModal>}
+      {error && <ErrorModal onClose={clear}>{error}</ErrorModal>}
       <IngredientForm 
         onAddIngredient={addIngredientHandler} 
         loading={isLoading}
@@ -145,3 +138,8 @@ export default Ingredients;
     // .then(responseData => {
     //   dispatch({type: 'ADD', ingredient: {id: responseData.name, ...ingredient }})
     // })  
+
+
+    // const clearError = useCallback(() => {
+  //   clear()
+  // }, [])
