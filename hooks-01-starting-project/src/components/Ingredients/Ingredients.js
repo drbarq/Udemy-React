@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect, useCallback } from 'react';
+import React, { useReducer, useEffect, useCallback } from 'react';
 
 import IngredientForm from './IngredientForm';
 import IngredientList from './IngredientList'
@@ -18,12 +18,25 @@ const ingredientReducer = (currentIngredients, action) => {
   }
 }
 
+const httpReducer = (curHttpState, action) => {
+  switch (action.type) {
+    case 'SEND':
+      return {loading: true, error: null}
+    case 'RESPONSE':
+      return {...curHttpState, loading: false }
+    case 'ERROR':
+      return {loading: false, error: action.errorMessage}
+    case 'CLEAR':
+      return {...curHttpState, error: null}
+    default: 
+      throw new Error('Should not be reached!')
+  }
+}
+
 
 function Ingredients() {
   const [ userIngredients, dispatch ] = useReducer(ingredientReducer, [])
-  // const [ userIngredients, setUserIngredients] = useState([])
-  const [ isLoading, setIsLoading ] = useState(false)
-  const [ error, setError ] = useState()
+  const [ httpState, dispatchHttp] = useReducer(httpReducer, {loading: false, error: null})
 
   useEffect(() => {
     console.log('Rendering Ingredients', userIngredients)
@@ -34,7 +47,7 @@ function Ingredients() {
   }, [])
 
   const addIngredientHandler = ingredient => {
-    setIsLoading(true)
+    dispatchHttp({type: 'SEND'})
     fetch('https://udemy-react-burgerhook.firebaseio.com/ingredients.json', {
       method: 'POST',
       body: JSON.stringify(ingredient),
@@ -42,7 +55,7 @@ function Ingredients() {
         'Content-Type': 'application/json'
       }
     }).then(response => {
-      setIsLoading(false)
+      dispatchHttp({type:'RESPONSE'})
       return response.json()
     }).then(responseData => {
       dispatch({type: 'ADD', ingredient: {id: responseData.name, ...ingredient }})
@@ -50,30 +63,28 @@ function Ingredients() {
   }
 
   const removeIngredientHandler = ingredientId => {
-    setIsLoading(true)
+    dispatchHttp({type: 'SEND'})
     fetch(`https://udemy-react-burgerhook.firebaseio.com/ingredients/${ingredientId}.json`, {
       method: 'DELETE'
     }).then(response => {
-      setIsLoading(false)
+      dispatchHttp({type:'RESPONSE'})
       dispatch({type: 'DELETE', id: ingredientId})
     }).catch(error => {
-      setError('Something Went Wrong')
-      setIsLoading(false)
+      dispatchHttp({type: 'ERROR', errorMessage: error.message})
     })
   }
 
   const clearError = () => {
-    setError(null)
+    dispatchHttp({type: 'CLEAR'})
   }
 
   return (
     <div className="App">
-      {error && <ErrorModal onClose={clearError}>{error}</ErrorModal>}
+      {httpState.error && <ErrorModal onClose={clearError}>{httpState.error}</ErrorModal>}
       <IngredientForm 
         onAddIngredient={addIngredientHandler} 
-        loading={isLoading}
+        loading={httpState.loading}
       />
-
       <section>
         <Search onLoadIngredients={filteredIngredientsHandler}/>
         <IngredientList ingredients={userIngredients} onRemoveItem={removeIngredientHandler}/>
@@ -115,3 +126,12 @@ export default Ingredients;
         // prevIngredients.filter((ingredient) => ingredient.id !== ingredientId))
 
             // setUserIngredients(filteredIngredients)
+  // const [ userIngredients, setUserIngredients] = useState([])
+        // setError('Something Went Wrong')
+      // setIsLoading(false)    // setError(null)
+      // setIsLoading(false)      // setIsLoading(false)      // setIsLoading(true)
+
+  // const [ isLoading, setIsLoading ] = useState(false)
+  // const [ error, setError ] = useState()
+
+      // setIsLoading(true)
