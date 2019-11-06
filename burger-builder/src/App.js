@@ -6,7 +6,6 @@ import BurgerBuilder from '../src/containers/BurgerBuilder/BurgerBuilder'
 class App extends Component {
   render() {
     return(
-      // <div className={styles["App"]}>
       <div>
         <Layout>
           <BurgerBuilder />
@@ -17,3 +16,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+      // <div className={styles["App"]}>
