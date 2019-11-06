@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './App.module.css';
 
-function App() {
-  return (
-    <div className={styles["App"]}>
-      <p>Hello</p>
-    </div>
-    // <div className="Joe">
 
-    // </div>
-  );
+class App extends Component {
+  render() {
+    return(
+      <div>
+
+      </div>
+    )
+  }
 }
 
 export default App;
