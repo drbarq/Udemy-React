@@ -4,7 +4,6 @@ import styles from './BurgerIngredient.module.css'
 const burgerIngredient = props => {
     let ingredient = null
 
-
     switch (props.type) {
         case('bread-bottom'):
             ingredient = <div className={styles.BreadBottom}></div>
@@ -20,13 +19,20 @@ const burgerIngredient = props => {
         case('meat'):
             ingredient = <div className={styles.Meat}></div>
             break
+        case('cheese'):
+            ingredient = <div className={styles.Cheese}></div>
+            break
+        case('salad'):
+            ingredient = <div className={styles.Salad}></div>
+            break
+        case('bacon'):
+            ingredient = <div className={styles.Bacon}></div>
+            break
+        default 
+            ingredient = null
+
     }
-
-
-    render() {
-        return
-    }
-
+    return ingredient
 }
 
 export default burgerIngredient
