@@ -26,7 +26,7 @@ const orderSummary = (props) => {
             <p>Continue to Checkout?</p>
             <Button
                 btnType="Danger"
-                clicked={props.purchaseCanceled}
+                clicked={props.purchaseCancelled}
             >
                 CANCEL
             </Button>
@@ -38,8 +38,6 @@ const orderSummary = (props) => {
             </Button>
         </Aux>
     )
-
-
 }
 
 export default orderSummary
