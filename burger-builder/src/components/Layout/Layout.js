@@ -10,7 +10,6 @@ class Layout extends Component {
         showSideDrawer: true
     }
 
-
     sideDrawerClosedHandler = () => {
         this.setState({showSideDrawer: false})
     }
@@ -24,7 +23,6 @@ class Layout extends Component {
                     open={this.state.showSideDrawer} 
                     closed={this.sideDrawerClosedHandler}
                 />
-                <div>Backdrop</div>
                 <main className={styles.Content}>
                     {this.props.children}
                 </main>
