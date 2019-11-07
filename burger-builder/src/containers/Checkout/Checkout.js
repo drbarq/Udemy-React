@@ -10,8 +10,7 @@ class Checkout extends Component {
             bacon: 1
         }
     }
-
-
+    
     render() {
         return(
             <div>
