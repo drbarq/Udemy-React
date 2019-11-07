@@ -3,6 +3,17 @@ import Aux from '../../../hoc/Aux'
 import Button from '../../UI/Button/Button'
 
 class OrderSummary extends Component {
+
+    // this could be a functional component, this always needs to update when the modal is shown 
+    // componentDidUpdate() {
+    //     console.log("Order Summary")
+    // }
+
+    componentWillUpdate() {
+        console.log("Order Summary")
+    }
+
+
     render () {
         const ingredientSummary = Object.keys(this.props.ingredients)
         .map((igKey) => {
