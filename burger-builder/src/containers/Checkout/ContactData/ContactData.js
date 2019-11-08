@@ -11,7 +11,8 @@ class ContactData extends Component {
         address: {
             street: '',
             postalCode: ''
-        }
+        },
+        loading: false
     }
 
     orderHandler = (e) => {
@@ -20,13 +21,17 @@ class ContactData extends Component {
                 // // alert('You continue!')
         this.setState({loading: true})
         const order = {
-            ingredients: this.state.ingredients,
+            ingredients: this.props.ingredients,
             price: this.props.price,
             customer: {
-                name: this.state.name,
+                name: 'Joe T',
                 address: {
-                    street: this.state.street,
-                    postalCode: this.state.postalCode
+                    street: '123 Test Street',
+                    postalCode: '80205'
+                // name: this.state.name,
+                // address: {
+                //     street: this.state.street,
+                //     postalCode: this.state.postalCode
                 },
                 email: 'J.Tustin@gmail.com'
             },
@@ -35,6 +40,7 @@ class ContactData extends Component {
         // minipulate the price data on the server to avoid users screwing with it 
         axios.post('/orders.json', order)
             .then(response => {
+                console.log(`WE ARE HERE${order}`)
                 this.setState({loading: false})
                 this.props.history.push('/')
             })
