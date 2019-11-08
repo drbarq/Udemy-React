@@ -12,6 +12,11 @@ class ContactData extends Component {
         }
     }
 
+    orderHandler = (e) => {
+        e.preventDefault()
+        console.log(this.props.ingredients)
+    }
+
     render() {
         return(
             <div className={styles.ContactData}>
@@ -21,7 +26,7 @@ class ContactData extends Component {
                     <input className={styles.Input} type="email" name="email" placeholder="Your email" />
                     <input className={styles.Input} type="text" name="street" placeholder="Street" />
                     <input className={styles.Input} type="text" name="postal" placeholder="Postal Code" />
-                    <Button btnType="Success">ORDER HERE</Button>
+                    <Button btnType="Success" clicked={this.orderHandler}>ORDER HERE</Button>
                 </form>
             </div>
         )
