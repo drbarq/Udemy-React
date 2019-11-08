@@ -1,3 +1,5 @@
+import * as actionTypes from './actions'
+
 const initialState = {
     counter: 0,
     results: []
@@ -5,37 +7,33 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch ( action.type ) {
-        case 'INCREMENT':
-            // dont do this, doesnt deeply clone
-            // const newState = Object.assign({}, state)
-            // newState.counter = state.counter + 1 
-            // return newState
+        case actionTypes.INCREMENT:
             return {
                 ...state,
                 counter: state.counter + 1
             }
-        case 'DECREMENT':
+        case actionTypes.DECREMENT:
             return {
                 ...state,
                 counter: state.counter - 1
             }
-        case 'ADD':
+        case actionTypes.ADD:
             return {
                 ...state,
                 counter: state.counter + action.val
             }
-        case 'SUB':
+        case actionTypes.SUB:
             return {
                 ...state,
                 counter: state.counter - action.val
             }
-        case 'STORE_RESULT':
+        case actionTypes.STORE_RESULT:
             return {
                 ...state,
                 results: state.results.concat({id: new Date(), value: state.counter})
                 // use concat so it returns a new array, push mutates the original array
             }
-        case 'DELETE_RESULT':
+        case actionTypes.DELETE_RESULT:
             const updatedArray = state.results.filter(result => result.id !== action.resultID)
             return {
                 ...state,
@@ -48,6 +46,54 @@ const reducer = (state = initialState, action) => {
 
 export default reducer
 
+
+
+
+
+
+
+
+
+// switch ( action.type ) {
+//     case 'INCREMENT':
+//         // dont do this, doesnt deeply clone
+//         // const newState = Object.assign({}, state)
+//         // newState.counter = state.counter + 1 
+//         // return newState
+//         return {
+//             ...state,
+//             counter: state.counter + 1
+//         }
+//     case 'DECREMENT':
+//         return {
+//             ...state,
+//             counter: state.counter - 1
+//         }
+//     case 'ADD':
+//         return {
+//             ...state,
+//             counter: state.counter + action.val
+//         }
+//     case 'SUB':
+//         return {
+//             ...state,
+//             counter: state.counter - action.val
+//         }
+//     case 'STORE_RESULT':
+//         return {
+//             ...state,
+//             results: state.results.concat({id: new Date(), value: state.counter})
+//             // use concat so it returns a new array, push mutates the original array
+//         }
+//     case 'DELETE_RESULT':
+//         const updatedArray = state.results.filter(result => result.id !== action.resultID)
+//         return {
+//             ...state,
+//             results: updatedArray
+//         }
+//     default:
+//         return state
+// }
 
 
 
