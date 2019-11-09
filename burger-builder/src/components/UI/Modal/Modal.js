@@ -11,7 +11,7 @@ class Modal extends Component {
     }
     // only listens to show/close in the modal
     componentWillUpdate = () => {
-        console.log('[Modal] WillUpdate')
+        // console.log('[Modal] WillUpdate')
     }
 
     render () {

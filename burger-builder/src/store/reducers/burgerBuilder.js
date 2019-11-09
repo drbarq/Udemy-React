@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes'
+import { updateObject } from '../utility'
 
 const initalState = {
     // ingredients: {},
@@ -18,15 +19,21 @@ const reducer = (state = initalState, action ) => {
     switch (action.type) {
         // deep clone of the object
         case actionTypes.ADD_INGREDIENT:
-            return {
-                ...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
-                },
+            const updatedIngredient = {[action.ingredientName]: state.ingredients[action.ingredientName] + 1}
+            const updatedIngredients = updateObject(state.ingredients, updatedIngredient)
+            const updatedState = {
+                ingredients: updatedIngredients,
                 totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
             }
+            return updateObject(state, updatedState)
         case actionTypes.REMOVE_INGREDIENT:
+            const updatedIng = {[action.ingredientName]: state.ingredients[action.ingredientName] - 1}
+            const updatedIngs = updateObject(state.ingredients, updatedIng)
+            const updatedSt = {
+                ingredients: updatedIngs,
+                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+            }
+            return updateObject(state, updatedSt)
             return {
                 ...state,
                 ingredients: {
