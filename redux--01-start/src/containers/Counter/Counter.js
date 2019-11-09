@@ -51,10 +51,12 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-// export default Counter
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
 
 
+
+
+// export default Counter
 
 // onIncrementCounter: () => dispatch(increment()),
 // onDecrementCounter: () => dispatch(decrement()),
