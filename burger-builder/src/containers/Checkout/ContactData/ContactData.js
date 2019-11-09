@@ -102,7 +102,7 @@ class ContactData extends Component {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             price: this.props.price,
             orderData: formData
         }
@@ -200,7 +200,6 @@ const mapStateToProps =  state => {
         price: state.totalPrice
     }
 }
-
 
 export default connect(mapStateToProps)(ContactData)
 
