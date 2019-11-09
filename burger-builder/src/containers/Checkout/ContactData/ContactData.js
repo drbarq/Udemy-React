@@ -196,7 +196,7 @@ const mapStateToProps = state => {
     }
 }
 // this function is different than the video 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
         onOrderBurger: (orderData) => dispatch(actions.purchaseBurgerStart(orderData))
     }
