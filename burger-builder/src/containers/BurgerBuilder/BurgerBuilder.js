@@ -12,10 +12,6 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import * as actionTypes from '../../store/actions'
 
 class BurgerBuilder extends Component {
-    // constructor(props) {
-    //     super(props)
-    //     this.state={}
-    // }
     state = {
         purchasing: false,
         loading: false,
@@ -53,16 +49,7 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        const queryParams = []
-        for (let i in this.state.ingredients) {
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
-        }
-        queryParams.push('price=' + this.state.totalPrice)
-        const queryString = queryParams.join('&')
-        this.props.history.push({
-            pathname: '/checkout',
-            search: '?' + queryString
-        })
+        this.props.history.push('/checkout')
     }
 
     render() {
@@ -134,6 +121,10 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios))
 
 
+    // constructor(props) {
+    //     super(props)
+    //     this.state={}
+    // }
 
 // addIngredientHandler = type => {
 //     const oldCount = this.state.ingredients[type]
@@ -169,4 +160,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Bur
 // }
 
                         // purchaseable={this.state.purchaseable}
-                        
+// purchaseContinueHandler = () => {
+//     const queryParams = []
+//     for (let i in this.state.ingredients) {
+//         queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+//     }
+//     queryParams.push('price=' + this.state.totalPrice)
+//     const queryString = queryParams.join('&')
+//     this.props.history.push({
+//         pathname: '/checkout',
+//         search: '?' + queryString
+//     })
+// }
