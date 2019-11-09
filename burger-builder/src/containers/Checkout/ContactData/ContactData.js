@@ -202,8 +202,8 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios))
-export default connect(mapStateToProps)(withErrorHandler(ContactData, axios))
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios))
+
 
 
 
@@ -226,3 +226,5 @@ export default connect(mapStateToProps)(withErrorHandler(ContactData, axios))
                 //         price: this.props.price,
                 //         orderData: formData
                 //     }
+
+                // export default connect(mapStateToProps)(withErrorHandler(ContactData, axios))

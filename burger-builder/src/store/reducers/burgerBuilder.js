@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes'
 
 const initalState = {
-    ingredients: {},
+    // ingredients: {},
+    ingredients: null,
     totalPrice: 4,
     error: false
 }
