@@ -6,6 +6,8 @@ import styles from './ContactData.module.css'
 import axios from '../../../axios-orders'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
+import * as actions from '../../../store/actions/index'
 
 class ContactData extends Component {
     state = {
@@ -96,7 +98,7 @@ class ContactData extends Component {
 
     orderHandler = (event) => {
         event.preventDefault()
-        this.setState({loading: true})
+
         const formData = {}
         for (let formElementIdentifier in this.state.orderForm) {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value
@@ -106,16 +108,9 @@ class ContactData extends Component {
             price: this.props.price,
             orderData: formData
         }
-        // minipulate the price data on the server to avoid users screwing with it 
-        axios.post('/orders.json', order)
-            .then(response => {
-                // console.log(`WE ARE HERE${order}`)
-                this.setState({loading: false})
-                this.props.history.push('/')
-            })
-            .catch(error => {
-                this.setState({loading: false})
-            })
+
+        this.props.onOrderBurger(order)
+
     }
 
     checkValidity = (value, rules) => {
@@ -194,14 +189,22 @@ class ContactData extends Component {
     }
 }
 
-const mapStateToProps =  state => {
+const mapStateToProps = state => {
     return {
         ings: state.ingredients,
         price: state.totalPrice
     }
 }
+// this function is different than the video 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onOrderBurger: (orderData) => dispatch(actions.purchaseBurgerStart(orderData))
+    }
+}
 
-export default connect(mapStateToProps)(ContactData)
+
+// export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios))
+export default connect(mapStateToProps)(withErrorHandler(ContactData, axios))
 
 
 
@@ -209,4 +212,18 @@ export default connect(mapStateToProps)(ContactData)
 // <Input inputtype="input" type="text" name="street" placeholder="Street" />
 // <Input inputtype="input" type="text" name="postal" placeholder="Postal Code" />
 
-                {/* <Input elementType="..." elementConfig="..." value="...." /> */}
+                /* <Input elementType="..." elementConfig="..." value="...." /> */
+
+
+                // orderHandler = (event) => {
+                //     event.preventDefault()
+                //     this.setState({loading: true})
+                //     const formData = {}
+                //     for (let formElementIdentifier in this.state.orderForm) {
+                //         formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value
+                //     }
+                //     const order = {
+                //         ingredients: this.props.ings,
+                //         price: this.props.price,
+                //         orderData: formData
+                //     }
