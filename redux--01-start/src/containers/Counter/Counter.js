@@ -12,8 +12,6 @@ class Counter extends Component {
         counter: 0
     }
 
-
-
     render () {
         return (
             <div>
