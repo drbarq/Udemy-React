@@ -13,20 +13,12 @@ import * as burgerBuilderActions from '../../store/actions/index'
 
 class BurgerBuilder extends Component {
     state = {
-        purchasing: false,
-        loading: false,
-        error: null
+        purchasing: false
     }
 
-    // componentDidMount = () => {
-    //     axios.get('https://burgerbuilder-e0733.firebaseio.com/ingredients.json')
-    //         .then(response => {
-    //             this.setState({ingredients: response.data})
-    //         })
-    //         .catch(error => {
-    //             this.setState({error: true})
-    //         })
-    // }
+    componentDidMount = () => {
+        
+    }
 
     updatePurchaseState = (ingredients) => {
         const sum = Object.keys(ingredients)
@@ -172,3 +164,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Bur
 //         search: '?' + queryString
 //     })
 // }
+
+// loading: false,
+// error: null
