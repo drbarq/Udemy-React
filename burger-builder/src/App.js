@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Layout from './hoc/Layout/Layout'
@@ -35,11 +35,12 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState())
+    onTryAutoSignup: () => dispatch(actions.authCheckState()) 
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default withRouter(connect(null, mapDispatchToProps)(App))
+// export default connect(null, mapDispatchToProps)(App)
 
 
 // <BurgerBuilder />
@@ -54,7 +55,7 @@ export default connect(null, mapDispatchToProps)(App);
   // }
 
 
-            {/* {this.state.show ? <BurgerBuilder /> : null } */}
+            /* {this.state.show ? <BurgerBuilder /> : null } */
   // componentDidMount = () => {
   //   setTimeout(() => {
   //     this.setState({show: false})
