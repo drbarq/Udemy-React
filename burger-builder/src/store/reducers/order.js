@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
-import { updateObject } from '../utility'
+// import { updateObject } from '../utility'
+import { updateObject } from '../../shared/utility'
 // import { purchaseInit } from '../actions'
 
 const initialState = {
