@@ -146,6 +146,23 @@ class ContactData extends Component {
 
 
     inputChangedHandler = (event, inputId) => {
+        const updatedFormElement = updateObject(this.state.orderForm[inputId], {
+            value: event.target.value,
+            valid: this.checkValidity(event.target.value, this.state.orderForm[inputId].validation),
+            touched: true
+        })
+
+        const updatedOrderForm = updateObject(this.state.orderForm, {
+            [inputId]: updatedFormElement
+        })
+
+        let formIsValid = true
+        for (let inputId in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputId].valid && formIsValid
+        }
+        this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid})
+
+
         // console.log(event.target.value)
         // const updatedOrderForm = {
         //     ...this.state.orderForm
@@ -154,28 +171,12 @@ class ContactData extends Component {
         //     ...updatedOrderForm[inputId]
         // }
 
-        const updatedFormElement = updateObject(this.state.orderForm[inputId], {
-            value: event.target.value,
-            valid: this.checkValidity(event.target.value, this.state.validation),
-            touched: true
-        })
-
-        const updatedOrderForm = updateObject(this.state.orderForm, {
-            [inputId]: updatedFormElement
-        })
-
         // updatedFormElement.value =  event.target.value
         // updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation),
         // updatedFormElement.touched = true
 
 
         // updatedOrderForm[inputId] = updatedFormElement
-
-        let formIsValid = true
-        for (let inputId in updatedOrderForm) {
-            formIsValid = updatedOrderForm[inputId].valid && formIsValid
-        }
-        this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid})
     }
 
     render() {
