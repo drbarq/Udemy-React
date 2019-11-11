@@ -5,34 +5,40 @@ import Backdrop from '../Backdrop/Backdrop'
 import styles from './Modal.module.css'
 
 
-class Modal extends Component {
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.show !== this.props.show || nextProps.children !== this.props.children
-    }
-    // only listens to show/close in the modal
-    componentWillUpdate = () => {
-        // console.log('[Modal] WillUpdate')
-    }
+// class Modal extends Component {
+const Modal = props => {
 
-    render () {
-        return (
-            <Aux>
-                <Backdrop show={this.props.show} clicked={this.props.modalClosed}/>
-                <div 
-                    className={styles.Modal}
-                    style={{
-                        transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
-                        opacity: this.props.show ? '1' : '0'
-                    }}
-                >
-                    {this.props.children}
-                </div>
-            </Aux>
-        )
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return nextProps.show !== this.props.show || nextProps.children !== this.props.children
+    // }
+    // only listens to show/close in the modal
+    // componentWillUpdate = () => {
+    //     // console.log('[Modal] WillUpdate')
+    // }
+
+    return (
+        <Aux>
+            <Backdrop show={props.show} clicked={props.modalClosed}/>
+            <div 
+                className={styles.Modal}
+                style={{
+                    transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
+                    opacity: props.show ? '1' : '0'
+                }}
+            >
+                {props.children}
+            </div>
+        </Aux>
+    )
+
 }
 
-export default Modal
+export default React.memo(
+    Modal, 
+    (prevProps, nextProps) => 
+        nextProps.show === prevProps.show && 
+        nextProps.children === prevProps.children
+    )
 
 
 //  pre refactor
