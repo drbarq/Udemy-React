@@ -6,13 +6,11 @@ import * as actions from '../../../store/actions/index'
 
 // class Logout extends Component {
 const Logout = props => {
-
     useEffect(() => {
         props.onLogout()
     }, [])
 
-
-        return <Redirect to="/"/>
+    return <Redirect to="/"/>
 }
 
 const mapDispatchToProps = dispatch => {
