@@ -70,64 +70,61 @@ const Auth = props => {
 
     const switchAuthModeHandler = () => {
         setIsSignup(!isSignUp)
-        // this.setState(prevState => {
-        //     return { isSignup: !prevState.isSignup }
-        // })
     }
 
-        const formElementsArray = []
-        for (let key in authForm) {
-            formElementsArray.push({
-                id: key,
-                config: authForm[key]
-            })
-        }
+    const formElementsArray = []
+    for (let key in authForm) {
+        formElementsArray.push({
+            id: key,
+            config: authForm[key]
+        })
+    }
 
-        let form = formElementsArray.map(formElement => (
-            <Input
-                key={formElement.id}
-                elementType={formElement.config.elementType}
-                elementConfig={formElement.config.elementConfig}
-                value={formElement.config.value}
-                invalid={!formElement.config.valid}
-                shouldValidate={formElement.config.validation}
-                touched={formElement.config.touched}
-                changed={(event) => inputChangedHandler(event, formElement.id)}
-            />
-        ))
+    let form = formElementsArray.map(formElement => (
+        <Input
+            key={formElement.id}
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+            invalid={!formElement.config.valid}
+            shouldValidate={formElement.config.validation}
+            touched={formElement.config.touched}
+            changed={(event) => inputChangedHandler(event, formElement.id)}
+        />
+    ))
 
-        if (props.loading) {
-            form = <Spinner />
-        }
+    if (props.loading) {
+        form = <Spinner />
+    }
 
-        let errorMessage = null
-        if (props.error) {
-            errorMessage = (
-                <p>{props.error.message}</p>
-            )
-        }
-
-        let authRedirect = null
-        if (props.isAuthenticated) {
-            authRedirect = <Redirect to={props.authRedirectPath}/>
-        }
-
-        return (
-            <div className={styles.Auth}>
-                {authRedirect}
-                {errorMessage}
-                <form onSubmit={submitHandler}>
-                    {form}
-                    <Button btnType="Success">SUBMIT</Button>
-                </form>
-                <Button 
-                    btnType="Danger"
-                    clicked={switchAuthModeHandler}
-                >
-                    SWITCH TO {isSignUp ? 'SIGNIN' : 'SIGNUP'}
-                </Button>
-            </div>
+    let errorMessage = null
+    if (props.error) {
+        errorMessage = (
+            <p>{props.error.message}</p>
         )
+    }
+
+    let authRedirect = null
+    if (props.isAuthenticated) {
+        authRedirect = <Redirect to={props.authRedirectPath}/>
+    }
+
+    return (
+        <div className={styles.Auth}>
+            {authRedirect}
+            {errorMessage}
+            <form onSubmit={submitHandler}>
+                {form}
+                <Button btnType="Success">SUBMIT</Button>
+            </form>
+            <Button 
+                btnType="Danger"
+                clicked={switchAuthModeHandler}
+            >
+                SWITCH TO {isSignUp ? 'SIGNIN' : 'SIGNUP'}
+            </Button>
+        </div>
+    )
     
 }
 
