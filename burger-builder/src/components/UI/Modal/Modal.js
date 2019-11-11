@@ -8,14 +8,6 @@ import styles from './Modal.module.css'
 // class Modal extends Component {
 const Modal = props => {
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return nextProps.show !== this.props.show || nextProps.children !== this.props.children
-    // }
-    // only listens to show/close in the modal
-    // componentWillUpdate = () => {
-    //     // console.log('[Modal] WillUpdate')
-    // }
-
     return (
         <Aux>
             <Backdrop show={props.show} clicked={props.modalClosed}/>
@@ -58,3 +50,13 @@ export default React.memo(
 // )
 
 // export default modal
+
+
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return nextProps.show !== this.props.show || nextProps.children !== this.props.children
+    // }
+    // only listens to show/close in the modal
+    // componentWillUpdate = () => {
+    //     // console.log('[Modal] WillUpdate')
+    // }
