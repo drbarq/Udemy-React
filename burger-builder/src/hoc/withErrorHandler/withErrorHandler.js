@@ -9,7 +9,6 @@ const withErrorHandler = (WrappedComponent, axios) => {
     return props => {
         const [error, clearError] =  useHttpErrorHandler(axios)
 
-
         return (
             <Aux>
                 <Modal 

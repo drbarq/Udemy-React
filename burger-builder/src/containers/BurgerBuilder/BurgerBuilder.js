@@ -20,9 +20,11 @@ const BurgerBuilder = props => {
     //     purchasing: false
     // }
 
+    const { oninitIngredients } = props
+
     useEffect(() => {
-        props.oninitIngredients()
-    }, [])
+        oninitIngredients()
+    }, [oninitIngredients])
 
     // componentDidMount = () => {
     //     // console.log(this.props)
