@@ -10,7 +10,7 @@ import { updateObject, checkValidity } from '../../shared/utility'
 
 // class Auth extends Component {
 const Auth = props => {
-    const [controls, setContols] = useState({
+    const [authForm, setAuthForm] = useState({
             email: {
                 elementType: 'input',
                 elementConfig: {
@@ -49,23 +49,23 @@ const Auth = props => {
         if (!props.buildingBurger && props.authRedirectPath !== '/') {
             props.onSetAuthRedirectPath()
         }
-    })
+    }, [])
 
 
     const inputChangedHandler = (event, controlName) => {
-        const updatedControls = updateObject(controls, {
-            [controlName]: updateObject(controls[controlName], {
+        const updatedControls = updateObject(authForm, {
+            [controlName]: updateObject(authForm[controlName], {
                 value: event.target.value,
-                valid: checkValidity(event.target.value, controls[controlName].validation),
+                valid: checkValidity(event.target.value, authForm[controlName].validation),
                 touched: true
             })  
         })
-        setContols(updatedControls)
+        setAuthForm(updatedControls)
     }
 
     const submitHandler = (event) => {
         event.preventDefault()
-        props.onAuth(controls.email.value, controls.password.value, isSignUp)
+        props.onAuth(authForm.email.value, authForm.password.value, isSignUp)
     }
 
     const switchAuthModeHandler = () => {
@@ -76,10 +76,10 @@ const Auth = props => {
     }
 
         const formElementsArray = []
-        for (let key in controls) {
+        for (let key in authForm) {
             formElementsArray.push({
                 id: key,
-                config: controls[key]
+                config: authForm[key]
             })
         }
 
