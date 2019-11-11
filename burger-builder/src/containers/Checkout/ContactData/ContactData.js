@@ -113,37 +113,6 @@ class ContactData extends Component {
         this.props.onOrderBurger(order, this.props.token)
     }
 
-    // checkValidity(value, rules) {
-    //     let isValid = true;
-    //     if (!rules) {
-    //         return true;
-    //     }
-        
-    //     if (rules.required) {
-    //         isValid = value.trim() !== '' && isValid;
-    //     }
-
-    //     if (rules.minLength) {
-    //         isValid = value.length >= rules.minLength && isValid
-    //     }
-
-    //     if (rules.maxLength) {
-    //         isValid = value.length <= rules.maxLength && isValid
-    //     }
-
-    //     if (rules.isEmail) {
-    //         const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    //         isValid = pattern.test(value) && isValid
-    //     }
-
-    //     if (rules.isNumeric) {
-    //         const pattern = /^\d+$/;
-    //         isValid = pattern.test(value) && isValid
-    //     }
-
-    //     return isValid;
-    // }
-
 
     inputChangedHandler = (event, inputId) => {
         const updatedFormElement = updateObject(this.state.orderForm[inputId], {
@@ -161,22 +130,6 @@ class ContactData extends Component {
             formIsValid = updatedOrderForm[inputId].valid && formIsValid
         }
         this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid})
-
-
-        // console.log(event.target.value)
-        // const updatedOrderForm = {
-        //     ...this.state.orderForm
-        // }
-        // const updatedFormElement = {
-        //     ...updatedOrderForm[inputId]
-        // }
-
-        // updatedFormElement.value =  event.target.value
-        // updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation),
-        // updatedFormElement.touched = true
-
-
-        // updatedOrderForm[inputId] = updatedFormElement
     }
 
     render() {
@@ -236,6 +189,22 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios))
 
 
+
+        // console.log(event.target.value)
+        // const updatedOrderForm = {
+        //     ...this.state.orderForm
+        // }
+        // const updatedFormElement = {
+        //     ...updatedOrderForm[inputId]
+        // }
+
+        // updatedFormElement.value =  event.target.value
+        // updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation),
+        // updatedFormElement.touched = true
+
+
+        // updatedOrderForm[inputId] = updatedFormElement
+
     // checkValidity = (value, rules) => {
     //     let isValid = true
     //     if (rules.required) {
@@ -272,3 +241,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Con
                 //     }
 
                 // export default connect(mapStateToProps)(withErrorHandler(ContactData, axios))
+
+
+    // checkValidity(value, rules) {
+    //     let isValid = true;
+    //     if (!rules) {
+    //         return true;
+    //     }
+        
+    //     if (rules.required) {
+    //         isValid = value.trim() !== '' && isValid;
+    //     }
+
+    //     if (rules.minLength) {
+    //         isValid = value.length >= rules.minLength && isValid
+    //     }
+
+    //     if (rules.maxLength) {
+    //         isValid = value.length <= rules.maxLength && isValid
+    //     }
+
+    //     if (rules.isEmail) {
+    //         const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    //         isValid = pattern.test(value) && isValid
+    //     }
+
+    //     if (rules.isNumeric) {
+    //         const pattern = /^\d+$/;
+    //         isValid = pattern.test(value) && isValid
+    //     }
+
+    //     return isValid;
+    // }
